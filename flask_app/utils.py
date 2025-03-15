@@ -6,7 +6,9 @@ from langchain.schema import Document
 from langchain_community.vectorstores import FAISS
 from langchain_community.embeddings import HuggingFaceEmbeddings
 import pickle
+from dotenv import load_dotenv
 
+env=load_dotenv()
 # Embedding model
 model_name = "all-mpnet-base-v2"
 embedding = HuggingFaceEmbeddings(model_name=model_name)
@@ -21,7 +23,7 @@ def search_articles(query):
         "hl": "en",
         "gl": "us",
         "google_domain": "google.com",
-        "api_key": '86cb3126078e6a54e7382695f09764d25e153980590b163ee96120b4dc16fbc3'
+        "api_key": env.SERP_API
     }
     search = GoogleSearch(params)
     results = search.get_dict()
